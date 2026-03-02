@@ -3,6 +3,7 @@ import useProducts from "../api/products";
 import type { Product } from "../api/products";
 import { useMemo, useState, useEffect } from "react";
 import { TicketPercent, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 type ProductGridProps = {
   searchQuery?: string;
@@ -108,11 +109,13 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <div className="grid grid-cols-1 gap-2 border border-gray-300 rounded-md p-2 shadow-md hover:shadow-lg transition-shadow duration-300">
       <div className="cursor-pointer">
-        <img
-          src={product.image.url}
-          alt={product.image.alt}
-          className="w-full h-70 rounded-md overflow-hidden object-cover"
-        />
+        <Link href={`/product/${product.id}`}>
+          <img
+            src={product.image.url}
+            alt={product.image.alt}
+            className="w-full h-70 rounded-md overflow-hidden object-cover"
+          />
+        </Link>
       </div>
       <div className="cursor-pointer w-fit">
         <h2 className="text-lg font-bold">{product.title}</h2>
