@@ -3,12 +3,14 @@
 type SearchBarProps = {
   value: string;
   onChange: (value: string) => void;
+  onSubmit?: () => void;
   compact?: boolean;
 };
 
 export default function SearchBar({
   value,
   onChange,
+  onSubmit,
   compact = false,
 }: SearchBarProps) {
   return (
@@ -26,6 +28,7 @@ export default function SearchBar({
       />
       <button
         type="button"
+        onClick={onSubmit}
         className={
           compact
             ? "flex shrink-0 cursor-pointer items-center justify-center rounded-md bg-gray-800 px-4 py-2 h-8 text-white transition duration-300 hover:scale-[1.02]"

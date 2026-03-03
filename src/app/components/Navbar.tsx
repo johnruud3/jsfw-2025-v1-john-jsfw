@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import ShoppingCart from "./ShoppingCart";
@@ -9,21 +10,23 @@ type NavbarProps = {
   onSearchChange?: (value: string) => void;
 };
 
-export default function Navbar({
-  searchQuery = "",
-  onSearchChange,
-}: NavbarProps) {
+export default function Navbar({ searchQuery, onSearchChange }: NavbarProps) {
+  const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const [localQuery, setLocalQuery] = useState("");
+
+  const searchValue = searchQuery ?? localQuery;
+  const setSearchValue = onSearchChange ?? setLocalQuery;
+
+  const handleSearchSubmit = () => {
+    router.push(`/?search=${encodeURIComponent(searchValue)}`);
   };
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -53,8 +56,9 @@ export default function Navbar({
 
       <div className="md:flex hidden min-w-0 flex-1 max-w-md">
         <SearchBar
-          value={searchQuery ?? ""}
-          onChange={onSearchChange ?? (() => {})}
+          value={searchValue}
+          onChange={setSearchValue}
+          onSubmit={handleSearchSubmit}
           compact
         />
       </div>
@@ -66,16 +70,15 @@ export default function Navbar({
         >
           Home
         </Link>
-
         <Link
           href="/about"
           className="text-white no-underline transition duration-300 hover:scale-110"
         >
           About
         </Link>
-
         <ShoppingCart />
       </ul>
+
       <button
         ref={buttonRef}
         type="button"
@@ -83,7 +86,7 @@ export default function Navbar({
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         className="flex cursor-pointer flex-col justify-center items-center gap-1 w-8 h-8 transition duration-300 hover:scale-110 md:hidden"
       >
-        <span className="block w-6 h-0.5 bg-white transition duration-300 hover:scale-120 "></span>
+        <span className="block w-6 h-0.5 bg-white transition duration-300 hover:scale-120"></span>
         <span className="block w-6 h-0.5 bg-white transition duration-300 hover:scale-120"></span>
         <span className="block w-6 h-0.5 bg-white transition duration-300 hover:scale-120"></span>
       </button>
@@ -115,8 +118,12 @@ export default function Navbar({
             <ShoppingCart />
           </Link>
           <SearchBar
-            value={searchQuery ?? ""}
-            onChange={onSearchChange ?? (() => {})}
+            value={searchValue}
+            onChange={setSearchValue}
+            onSubmit={() => {
+              handleSearchSubmit();
+              closeMenu();
+            }}
             compact
           />
         </div>
