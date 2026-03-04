@@ -26,7 +26,7 @@ export default function ProductGrid({ searchQuery = "" }: ProductGridProps) {
         <BestDeals products={products} />
       </div>
       <h2 className="text-2xl font-bold">All Products</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 px-10 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:px-10 mt-10">
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
@@ -108,7 +108,7 @@ export function DiscountPrice({ product }: { product: Product }) {
 function ProductCard({ product }: { product: Product }) {
   if (!product) return null;
   return (
-    <div className="grid grid-cols-1 gap-2 border border-gray-300 rounded-md p-2 shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="grid grid-cols-1 grid-rows-[auto_auto_auto_auto_1fr_auto_auto_auto] gap-2 border border-gray-300 rounded-md p-2 shadow-md hover:shadow-lg transition-shadow duration-300">
       <div className="cursor-pointer">
         <Link href={`/product/${product.id}`}>
           <img
@@ -127,6 +127,7 @@ function ProductCard({ product }: { product: Product }) {
           : product.description}
       </p>
       <DiscountPrice product={product} />
+      <div />
       <Buttons product={product} />
       <div className="flex justify-between gap-5">
         <p className="text-gray-500 text-sm">Ratings: {product.rating}</p>
