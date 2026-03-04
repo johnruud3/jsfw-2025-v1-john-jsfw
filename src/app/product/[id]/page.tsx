@@ -21,13 +21,13 @@ export default function ProductPage() {
         <Link className="cursor-pointer" href="/">
           ← Back
         </Link>
-        <div className="flex items-center mt-4">
+        <div className="flex flex-col md:flex-row items-center mt-4 gap-4">
           <img
             src={product.image.url}
             alt={product.image.alt}
             className="w-full max-w-md h-auto rounded-lg"
           />
-          <div className="flex flex-col px-10">
+          <div className="flex gap-5 items-center md:items-start flex-col px-10">
             <h1 className="text-2xl font-bold mt-4">{product.title}</h1>
             <p className="mt-2">{product.description}</p>
             <p className="mt-2">
@@ -50,7 +50,9 @@ export default function ProductPage() {
             <p className="text-sm text-gray-500">
               Tags: {product.tags.join(", ")}
             </p>
-            <Buttons product={product} />
+            <div className="w-50">
+              <Buttons product={product} />
+            </div>
           </div>
         </div>
       </div>

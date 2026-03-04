@@ -17,6 +17,7 @@ type CartContextType = {
   cartItems: CartItem[];
   addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
+  clearCart: () => void;
   isCartOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
@@ -50,6 +51,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const openCart = useCallback(() => setIsCartOpen(true), []);
   const closeCart = useCallback(() => setIsCartOpen(false), []);
+  const clearCart = useCallback(() => setCartItems([]), []);
 
   return (
     <CartContext.Provider
@@ -57,6 +59,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         cartItems,
         addToCart,
         removeFromCart,
+        clearCart,
         isCartOpen,
         openCart,
         closeCart,
