@@ -51,6 +51,27 @@ export default function ProductPage() {
             <div className="w-50">
               <Buttons product={product} />
             </div>
+            {product.reviews && product.reviews.length > 0 && (
+              <div className="mt-6 border-t pt-4">
+                <h2 className="text-lg font-semibold mb-3">Reviews</h2>
+                <ul className="space-y-3">
+                  {product.reviews.map((review) => (
+                    <li
+                      key={review.id}
+                      className="border-b border-gray-200 pb-3 last:border-0"
+                    >
+                      <p className="font-medium text-sm">{review.username}</p>
+                      <p className="text-sm text-gray-600">
+                        Rating: {review.rating}/5
+                      </p>
+                      <p className="text-sm text-gray-700 mt-1">
+                        {review.description}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -15,14 +15,12 @@ export type Product = {
   };
   rating: number;
   tags: string[];
-  reviews: [
-    {
-      id: string;
-      username: string;
-      rating: number;
-      description: string;
-    },
-  ];
+  reviews: {
+    id: string;
+    username: string;
+    rating: number;
+    description: string;
+  }[];
 };
 
 export default function useProducts() {
