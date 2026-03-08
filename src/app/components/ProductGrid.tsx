@@ -95,14 +95,14 @@ export function DiscountPrice({ product }: { product: Product }) {
   if (product.discountedPrice < product.price) {
     return (
       <>
-        <p className="text-gray-500 line-through">${product.price}</p>
+        <p className="text-gray-500 line-through"> Kr {product.price}</p>
         <p className="flex gap-2 text-green-500">
-          ${product.discountedPrice} <TicketPercent />
+          Kr {product.discountedPrice} <TicketPercent />
         </p>
       </>
     );
   }
-  return <p>Price: ${product.price}</p>;
+  return <p>Price: Kr {product.price}</p>;
 }
 
 function ProductCard({ product }: { product: Product }) {

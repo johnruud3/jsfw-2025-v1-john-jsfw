@@ -140,7 +140,7 @@ export default function ShoppingCart() {
                         {item.product.title}
                       </p>
                       <p className="text-sm text-gray-600">
-                        $
+                        Kr{" "}
                         {item.product.discountedPrice < item.product.price
                           ? item.product.discountedPrice
                           : item.product.price}{" "}
@@ -165,7 +165,7 @@ export default function ShoppingCart() {
                   <p className="text-gray-500">VAT = 25%</p>
                   <p>
                     Total price ={" "}
-                    <span className="font-bold">${subTotal.toFixed(2)}</span>{" "}
+                    <span className="font-bold">Kr {subTotal.toFixed(2)}</span>{" "}
                     (incl. VAT)
                   </p>
                 </div>

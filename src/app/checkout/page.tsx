@@ -49,7 +49,7 @@ export default function CheckoutPage() {
                   <div className="md:w-100">
                     <p className="font-medium">{item.product.title}</p>
                     <p className="text-sm text-gray-600">
-                      ${price.toFixed(2)} × {item.quantity} = $
+                      Kr {price.toFixed(2)} × {item.quantity} = Kr{" "}
                       {lineTotal.toFixed(2)}
                     </p>
                   </div>
@@ -57,10 +57,10 @@ export default function CheckoutPage() {
               );
             })}
             <li className="pt-4">
-              <p>Subtotal: ${subTotal.toFixed(2)}</p>
-              <p>VAT (25%): ${vat.toFixed(2)}</p>
+              <p>Subtotal: Kr {subTotal.toFixed(2)}</p>
+              <p>VAT (25%): Kr {vat.toFixed(2)}</p>
               <p className="font-bold">
-                Total with VAT: ${totalWithVat.toFixed(2)}
+                Total with VAT: Kr {totalWithVat.toFixed(2)}
               </p>
             </li>
           </ul>

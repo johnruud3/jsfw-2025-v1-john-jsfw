@@ -32,14 +32,14 @@ export default function ProductPage() {
               {product.discountedPrice < product.price ? (
                 <>
                   <span className="line-through text-gray-500">
-                    ${product.price}
+                    Kr {product.price}
                   </span>{" "}
                   <span className="text-green-600">
-                    ${product.discountedPrice}
+                    Kr {product.discountedPrice}
                   </span>
                 </>
               ) : (
-                <>${product.price}</>
+                <>Kr {product.price}</>
               )}
             </p>
             <p className="text-sm text-gray-500 mt-2">
