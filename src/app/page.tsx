@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import ProductGrid from "./components/ProductGrid";
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -16,5 +16,19 @@ export default function Home() {
     <main>
       <ProductGrid searchQuery={searchQuery} />
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense
+      fallback={
+        <main>
+          <p className="p-4">Loading...</p>
+        </main>
+      }
+    >
+      <HomeContent />
+    </Suspense>
   );
 }
