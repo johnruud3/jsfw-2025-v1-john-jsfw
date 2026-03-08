@@ -66,16 +66,16 @@ export default function Navbar({ searchQuery, onSearchChange }: NavbarProps) {
 
       <ul className="md:flex gap-10 justify-start text-lg hidden">
         <Link
-          href="/"
-          className="text-white no-underline transition duration-300 hover:scale-110"
-        >
-          Home
-        </Link>
-        <Link
           href="/about"
           className="text-white no-underline transition duration-300 hover:scale-110"
         >
           About
+        </Link>
+        <Link
+          href="/contact"
+          className="text-white no-underline transition duration-300 hover:scale-110"
+        >
+          Contact
         </Link>
         <ShoppingCart />
       </ul>
@@ -113,6 +113,13 @@ export default function Navbar({ searchQuery, onSearchChange }: NavbarProps) {
             onClick={closeMenu}
           >
             About
+          </Link>
+          <Link
+            href="/contact"
+            className="origin-left text-white no-underline transition duration-300 hover:scale-110"
+            onClick={closeMenu}
+          >
+            Contact
           </Link>
           <div
             className="origin-left flex items-center gap-2 text-white no-underline transition duration-300 hover:scale-110"
