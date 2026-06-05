@@ -6,6 +6,7 @@ import {
   useState,
   useCallback,
   type ReactNode,
+  useEffect,
 } from "react";
 import { ShoppingCart as CartIcon, X } from "lucide-react";
 import Link from "next/link";
@@ -26,8 +27,21 @@ type CartContextType = {
 const CartContext = createContext<CartContextType | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const stored = localStorage.getItem("cart");
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = useCallback((product: Product, quantity = 1) => {
     setCartItems((prev) => {
@@ -166,7 +180,6 @@ export default function ShoppingCart() {
                   <p>
                     Total price ={" "}
                     <span className="font-bold">Kr {subTotal.toFixed(2)}</span>{" "}
-                    (incl. VAT)
                   </p>
                 </div>
                 <Link

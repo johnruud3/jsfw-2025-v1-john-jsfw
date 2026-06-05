@@ -52,7 +52,7 @@ export default function Navbar({ searchQuery, onSearchChange }: NavbarProps) {
         href="/"
         className="text-green-500 text-2xl font-bold no-underline transition duration-300 hover:scale-110"
       >
-        LOGO
+        SHOPNOW
       </Link>
 
       <div className="md:flex hidden min-w-0 flex-1 max-w-md">
